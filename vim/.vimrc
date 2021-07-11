@@ -41,6 +41,7 @@ set statusline=%-4m%f\ %y\ \ %=%{&ff}\ \|\ %{&fenc}\ [%l:%c]
 " point set with 'i'.  This configuration makes backspace behave more
 " reasonably, in that you can " backspace over anything.
 set backspace=indent,eol,start
+set encoding=utf-8
 
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer
 " that isn't shown in any window) that has unsaved changes.  This is
@@ -111,7 +112,7 @@ map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 " subdirectory and they will add to 'runtimepath'
 " All the pathogen plugin can be extracted under subdirectory
 " ~/.vim/bundle
-
-"This is ctrlp.vim plugin
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+if filereadable(expand("$HOME") . "/.vim/plug.vim")
+  source ~/.vim/plug.vim
+endif 
 

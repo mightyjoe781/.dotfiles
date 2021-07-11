@@ -38,3 +38,35 @@ tohex(){
     fi
 }
 
+hex2dec() {
+	printf "%d\n" 0x$1
+}
+
+hex2ip() {
+	printf '%d.%d.%d.%d\n' \
+	$(( 0x${1:6:2} )) \
+	$(( 0x${1:4:2} )) \
+	$(( 0x${1:2:2} )) \
+	$(( 0x${1:0:2} )) 
+}
+
+ip2hex() {
+	local octets
+	IFS=. read -a octets <<<"$1"
+	printf '%02x' "${octest[@]}"
+	echo
+}
+
+urlencode() {
+  local i= char= url=$*
+  declare -i len=${#url}
+
+  for (( i = 0; i < len; i++ )); do
+    char=${url:i:1}
+    case "$char" in
+      [a-zA-Z0-9.~_-]) printf "$char" ;;
+      ' ') printf + ;;
+      *) printf '%%%X' "'$char" ;;
+    esac
+  done
+}
