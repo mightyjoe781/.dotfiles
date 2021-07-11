@@ -1,0 +1,20 @@
+
+setprompt() {
+	local blue=$(tput setaf 4)
+	local purple=$(tput setaf 5)
+	local reset=$(tput sgr0)
+	PS1="\[$blue\]\h:\[$purple\]\w\[$reset\]\\$ "
+}
+
+setprompt() {
+	local md=$(tput md)	# bold
+	local mr=$(tput mr)	# reverse
+	local me=$(tput me)	# exit attributes
+	PS1='[\u@\h \w]\$ '
+	PS1="\$? \u@\h:\w \!\[${mr}\]\\\$\[${me}\] "
+}
+
+# setprompt
+
+# unset setprompt
+

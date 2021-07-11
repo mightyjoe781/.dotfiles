@@ -1,0 +1,19 @@
+# Bash completion script to provide Make targets
+
+__make() {
+  local targets
+  if [[ -s Makefile ]]; then
+    COMPREPLY=( $(egrep -o '^[[:alnum:]]+:' Makefile) )
+  fi
+}
+
+__make() { local targets; if [[ -s Makefile ]]; then COMPREPLY=( $(egrep -o '^[[:alnum:]]+:' Makefile) ); fi; }
+
+if make --version 2>&1 | grep -q GNU; then
+  __make() { local targets; if [[ -s Makefile ]]; then COMPREPLY=( $(make -pn | egrep -o '^[[:alnum:]]+:') ); fi; }
+else
+  __make() { local targets; if [[ -s Makefile ]]; then COMPREPLY=( $(make -V .ALLTARGETS) ); fi; }
+fi
+
+complete -o bashdefault -o default -F __make make
+#complete -F __topen topen

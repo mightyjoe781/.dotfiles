@@ -1,0 +1,33 @@
+
+alias g=git
+alias gd='git diff'
+
+# git ls-files | while read -r file; do git --no-pager log --format="format:%h %S %ai <%aE>" -1 -- "$file"; printf "%s\n" "$file"; done
+
+	#local -A files=() && eval files=( $(git status -s | sed -n 's/ \([A-Z]\) \(.*\)/[\2]="\1" /p') )
+
+gls() {
+	local me md green amber red blue grey
+	local yes='-' no='x'
+	if [ "$1" = "-b" ]; then
+		local yes='-' no='x'
+		shift
+	elif [ -t 1 ]; then
+		local yes='✓' no='✖' # no='❌';
+		me=$(tput me)	# exit attributes
+		md=$(tput md)	# bold
+		green=$( printf '\e[0;38;2;%sm' '0;255;0')
+		amber=$( printf '\e[0;38;2;%sm' '255;222;0')
+		red=$(   printf '\e[0;38;2;%sm' '255;0;0')
+		blue=$(  printf '\e[0;38;2;%sm' '128;128;255')
+		grey=$(  printf '\e[0;38;2;%sm' '128;128;128')
+	fi
+	#git ls-files | while read -r file; do
+	for file in ${*:-*}; do
+		git diff --quiet HEAD -- "$file" && status="${green}${yes}${me}" || status="${red}${no}${me}";
+		git --no-pager log --date='format:%F %H:%M' --format="format:$status"$' %h\t'"<${amber}%ce${me}>"$'\t%cd\t' -1 --exit-code -- "$file";
+		[ $? -eq 0 ] && printf "${grey}?\t${amber}-${me}\t-\t"
+		printf "${blue}%s${me}\n" "$file";
+	done | column -s $'\t' -t;
+}
+
