@@ -14,8 +14,8 @@ gls() {
 		shift
 	elif [ -t 1 ]; then
 		local yes='✓' no='✖' # no='❌';
-		me=$(tput me)	# exit attributes
-		md=$(tput md)	# bold
+	#	me=$(tput me)	# exit attributes
+	#	md=$(tput md)	# bold
 		green=$( printf '\e[0;38;2;%sm' '0;255;0')
 		amber=$( printf '\e[0;38;2;%sm' '255;222;0')
 		red=$(   printf '\e[0;38;2;%sm' '255;0;0')

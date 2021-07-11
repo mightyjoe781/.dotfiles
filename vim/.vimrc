@@ -4,8 +4,8 @@
 " Revision : 210419
 " License  : MIT
 " Author   : smk
-
 "---------------------------------------------------------------------
+"
 " Basic Config
 
 " Vim is based on Vi. Setting `nocompatible` switches from the default
