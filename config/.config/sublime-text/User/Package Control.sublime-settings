@@ -1,0 +1,14 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"HexViewer",
+		"MasmAssembly",
+		"MIPS Syntax",
+		"Package Control",
+		"Terminal"
+	]
+}

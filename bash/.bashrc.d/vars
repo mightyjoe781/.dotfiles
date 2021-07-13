@@ -7,8 +7,8 @@ export PAGER="less -rF"
 #
 # smk vars
 
-export TTY=$(tty)
-export GPG_TTY=$TTY
+#export TTY=$(tty)
+#export GPG_TTY=$TTY
 
 
 
