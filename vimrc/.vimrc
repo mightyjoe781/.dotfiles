@@ -8,23 +8,29 @@
 "
 " Basic Config
 
-" Vim is based on Vi. Setting `nocompatible` switches from the default
-" Vi-compatibility mode and enables useful Vim functionality This
-" configuration option turns out not to be necessary for the file
-" named " '~/.vimrc', because Vim automatically enters nocompatible
-" mode if that file " is present. But we're including it here just in
-" case this config file is " loaded some other way (e.g.  saved as
-" `foo`, and then Vim started with " `vim -u foo`).
 set nocompatible
-" sets text width to 70 and color the 72 column
+
+syntax on
+set noerrorbells visualbell t_vb=
+set tabstop=4 softtabstop=4
+set expandtab
+set smartindent
+set nu
+set nowrap
+set smartcase
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+" incremental search
+set incsearch
+
 set textwidth=70 
 set colorcolumn=72
-set ts=4 sw=4 " tab to 4
-set wrap
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 
-" Turn on syntax highlighting.
-syntax on
-
+set backspace=indent,eol,start
+set encoding=utf-8
 " Disable the default Vim startup message.
 set shortmess+=I
 
@@ -35,13 +41,6 @@ set relativenumber
 " shows status bar below
 set laststatus=2
 set statusline=%-4m%f\ %y\ \ %=%{&ff}\ \|\ %{&fenc}\ [%l:%c]
-
-" The backspace key has slightly unintuitive behavior by default.  For
-" example, " by default, you can't backspace before the insertion
-" point set with 'i'.  This configuration makes backspace behave more
-" reasonably, in that you can " backspace over anything.
-set backspace=indent,eol,start
-set encoding=utf-8
 
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer
 " that isn't shown in any window) that has unsaved changes.  This is
@@ -58,28 +57,19 @@ set hidden
 set ignorecase 
 set smartcase
 
-" Enable searching as you type, rather than waiting till you press
-" enter.
-set incsearch
-
 " Unbind some useless/annoying default key bindings.
 nmap Q <Nop> 
+
 " 'Q' in normal mode enters Ex mode. You almost never want this.
 
-" Disable audible bell because it's annoying.
-set noerrorbells visualbell t_vb=
-
-" Enable mouse support. You should avoid relying on this too much, but
-" it can sometimes be convenient.
+" mouse support enable
 set mouse+=a 
 filetype plugin indent on " enable file type detection
 set autoindent
 " open new split panes to right and bottom, which feels more natural
 set splitbelow 
 set splitright
-" Try to prevent bad habits like using the arrow keys for movement.
-" This is not the only possible bad habit. For example, holding down
-" the h/j/k/l keys
+" remove arrow keys
 nnoremap <Left>  :echoe "Use h"<CR> 
 nnoremap <Right> :echoe "Use l"<CR> 
 nnoremap <Up>    :echoe "Use k"<CR> 
@@ -89,6 +79,7 @@ inoremap <Left>  <ESC>:echoe "Use h"<CR>
 inoremap <Right> <ESC>:echoe "Use l"<CR> 
 inoremap <Up>    <ESC>:echoe "Use k"<CR> 
 inoremap <Down>	 <ESC>:echoe "Use j"<CR>
+
 " quicker window movement
 nnoremap <C-j> <C-w>j 
 nnoremap <C-k> <C-w>k 
@@ -106,13 +97,25 @@ set tags=./tags;/
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 "---------------------------------------------------------------------
-" Plugin Configs
+" Plug Config
 
-" with pathogen infect we wish to install can be extracted to a 
-" subdirectory and they will add to 'runtimepath'
-" All the pathogen plugin can be extracted under subdirectory
-" ~/.vim/bundle
-if filereadable(expand("$HOME") . "/.vim/plug.vim")
-  source ~/.vim/plug.vim
-endif 
+" if filereadable(expand("$HOME") . "/.vim/plug.vim")
+"  source ~/.vim/plug.vim
+" endif 
 
+call plug#begin('~/.vim/plugged')
+
+Plug 'morhetz/gruvbox'
+Plug 'jremmen/vim-ripgrep'
+Plug 'tpope/vim-fugitive'
+Plug 'leafgarland/typescript-vim'
+" Plug 'vim-utils/vim-man'
+" Requires vim built with python 3.7+
+" Plug 'lyuts/vim-rtags'
+Plug 'git@github.com:kien/ctrlp.vim.git'
+Plug 'mbbill/undotree'
+
+call plug#end()
+
+colorscheme gruvbox
+set background=dark

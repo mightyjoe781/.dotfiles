@@ -115,7 +115,5 @@ fi
 EASYRSA="/usr/local/share/easy-rsa"
 EASYRSA="/home/ca/easy-rsa"
 export EASYRSA
-export DOTFILES=$HOME/.dotfiles
-export STOW_FOLDERS="bash,git,screen,tmux,vim"
 if [[ -d $HOME/.bashrc.d ]]; then for _f in $HOME/.bashrc.d/*; do if [[ -x "$_f" ]] && [[ -f "$_f" ]]; then . "$_f"; fi done fi
 

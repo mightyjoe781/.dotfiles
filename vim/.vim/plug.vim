@@ -3,6 +3,8 @@
 "
 
 call plug#begin()
+
+
 Plug 'valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang --gocode-completer' }
 let g:ycm_global_ycm_extra_conf="/home/noclaf/.ycm_extra_conf.py"
 let g:ycm_confirm_extra_conf = 0
@@ -20,6 +22,14 @@ Plug 'fatih/vim-go'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'rhysd/vim-clang-format'
+
+Plug 'morhetz/gruvbox'
+Plug 'jremmen/vim-ripgrep'
+Plug 'leafgarland/typescript-vim'
+Plug 'lyuts/vim-rtags'
+Plug 'git@github.com:kien/ctrlp.vim.git'
+Plug 'mbbill/undotree'
+
 call plug#end()
 
 let g:clang_format#style = "google"
