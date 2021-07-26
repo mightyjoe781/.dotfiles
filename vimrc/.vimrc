@@ -105,15 +105,26 @@ map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'morhetz/gruvbox'
+" Utilities
+
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
-Plug 'leafgarland/typescript-vim'
-" Plug 'vim-utils/vim-man'
+" original ctrp is not maintained anymore
+Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 " Requires vim built with python 3.7+
-" Plug 'lyuts/vim-rtags'
-Plug 'git@github.com:kien/ctrlp.vim.git'
+Plug 'lyuts/vim-rtags'
 Plug 'mbbill/undotree'
+
+" Themes
+Plug 'morhetz/gruvbox'
+" Plug 'altercation/vim-colors-solarized'
+
+" Syntax and AutoCompletion
+Plug 'scrooloose/syntastic'
+Plug 'leafgarland/typescript-vim'
+" YCM requires python3.8 and cmake
+" Plug 'valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang --gocode-completer' }
+
 
 call plug#end()
 
