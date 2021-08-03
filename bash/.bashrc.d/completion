@@ -3,12 +3,12 @@ _completion_loader() {
 	. "$HOME/.bashrc.d/bash_completion.d/$1" >/dev/null 2>&1 && return 124
 }
 # complete: usage: complete [-abcdefgjksuv] [-pr] [-o option] [-A action] [-G globpat] [-W wordlist] [-P prefix] [-S suffix] [-X filterpat] [-F function] [-C command] [name ...]
-#if [[ $BASH_VERSION = 3* ]]; then
+if [[ $BASH_VERSION = 3* ]]; then
 	: complete -o bashdefault -o default -F _completion_loader
 	for f in $HOME/.bashrc.d/bash_completion.d/*; do
 		. "$f"
 	done
-#else
-#	complete -D -F _completion_loader -o bashdefault -o default
-#fi
+else
+	complete -D -F _completion_loader -o bashdefault -o default
+fi
 

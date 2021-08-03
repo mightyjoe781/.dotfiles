@@ -128,4 +128,5 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+
 if [[ -d $HOME/.bashrc.d ]]; then for _f in $HOME/.bashrc.d/*; do if [[ -x "$_f" ]] && [[ -f "$_f" ]]; then . "$_f"; fi done fi
