@@ -128,5 +128,7 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+export DOTFILES=$HOME/.dotfiles
+export STOW_FOLDERS="bashrc.d,git,screen,tmux,vimrc"
 
 if [[ -d $HOME/.bashrc.d ]]; then for _f in $HOME/.bashrc.d/*; do if [[ -x "$_f" ]] && [[ -f "$_f" ]]; then . "$_f"; fi done fi
