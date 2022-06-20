@@ -1,20 +1,25 @@
+
+# HOMEBREW Fix
 eval "$(/opt/homebrew/bin/brew shellenv)"
 # path+=$HOME/bin
 
-export PATH="$HOME/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="/opt/smkbin:$PATH"
-#export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/Users/smk/development/flutter/flutter/bin:$PATH"
-export PATH="$HOME/bin/go/bin:$PATH"
-export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
+# fzf
+export FZF_DEFAULT_OPTS="--color=16 --color='fg:white,fg+:white:bold,bg+:bright-black,hl:magenta:bold,marker:white:bold,prompt:blue,info:yellow' --bind=down:half-page-down,up:half-page-up"
+export FZF_DEFAULT_COMMAND="fd --type f \
+  --hidden \
+  --exclude .git \
+  --exclude .DS_Store \
+  --exclude .localized"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_PREVIEW_COMMAND="cat {}"
 
-export AS_SERVER_HOST=whois.ra.net
-export LESS="-a -C -d -e -h20 -i -M -Q -s -w"
-export LESS="-aCdeiMQX"
-export PAGER="less -rF"
-export GOPATH="$HOME/bin/go"
-export DOTFILES=$HOME/.dotfiles
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
 # alias g++="g++ --std=gnu++17"
+
+# source all files in .zshrc.d
+if [[ -d $HOME/.zshrc.d ]]; then 
+    for _f in $HOME/.zshrc.d/*; do
+        if [[ -x "$_f" ]] && [[ -f "$_f" ]]; then 
+            source $_f
+        fi 
+    done 
+fi

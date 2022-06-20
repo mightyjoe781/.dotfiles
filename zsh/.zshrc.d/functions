@@ -1,0 +1,7 @@
+
+dls() { ls -lad ${@:-*} | grep ^d |${PAGER:-cat}; }
+
+ttps() { ps uxt$(tty | cut -c 9-); }
+
+highlight() { sed -E "s/^\"//;s/\"$//;s/$1/[1m&[0m/g"; }
+

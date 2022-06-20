@@ -11,16 +11,6 @@ set wildignore+=**/android/*
 set wildignore+=**/ios/*
 set wildignore+=**/.git/*
 
-" Install vim-plug if not found
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-endif
-
-call plug#begin('~/.nvim/plugged')
-
-call plug#end()
-
 set nocompatible
 set showmatch
 set ignorecase
@@ -35,3 +25,17 @@ set tabstop=4
 set expandtab
 set shiftwidth=4
 set softtabstop=4
+
+" Install vim-plug if not found
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+call plug#begin('~/.vim/plugged')
+    Plug 'morhetz/gruvbox'
+    Plug 'tpope/vim-fugitive'
+call plug#end()
+"colorscheme gruvbox
+"set background=dark
+

@@ -1,0 +1,11 @@
+#!/usr/local/env zsh
+# vars file
+
+export AS_SERVER_HOST=whois.ra.net
+export LESS="-a -C -d -e -h20 -i -M -Q -s -w"
+export LESS="-aCdeiMQX"
+export PAGER="less -rF"
+export GOPATH="$HOME/bin/go"
+export DOTFILES=$HOME/.dotfiles
+#export TTY=$(tty)
+#export GPG_TTY=$TTY

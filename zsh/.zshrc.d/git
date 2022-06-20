@@ -1,0 +1,91 @@
+#!/usr/local/env zsh
+alias g=git
+alias gd='git diff'
+
+# git ls-files | while read -r file; do git --no-pager log --format="format:%h %S %ai <%aE>" -1 -- "$file"; printf "%s\n" "$file"; done
+
+# local -A files=() && eval files=( $(git status -s | sed -n 's/ \([A-Z]\) \(.*\)/[\2]="\1" /p') )
+
+gls() {
+	local me md green amber red blue grey
+	local yes='-' no='x'
+	if [ "$1" = "-b" ]; then
+		local yes='-' no='x'
+		shift
+	elif [ -t 1 ]; then
+		local yes='✓' no='✖' # no='❌';
+	#	me=$(tput me)	# exit attributes
+	#	md=$(tput md)	# bold
+		green=$( printf '\e[0;38;2;%sm' '0;255;0')
+		amber=$( printf '\e[0;38;2;%sm' '255;222;0')
+		red=$(   printf '\e[0;38;2;%sm' '255;0;0')
+		blue=$(  printf '\e[0;38;2;%sm' '128;128;255')
+		grey=$(  printf '\e[0;38;2;%sm' '128;128;128')
+	fi
+	#git ls-files | while read -r file; do
+	for file in ${*:-*}; do
+		git diff --quiet HEAD -- "$file" && status="${green}${yes}${me}" || status="${red}${no}${me}";
+		git --no-pager log --date='format:%F %H:%M' --format="format:$status"$' %h\t'"<${amber}%ce${me}>"$'\t%cd\t' -1 --exit-code -- "$file";
+		[ $? -eq 0 ] && printf "${grey}?\t${amber}-${me}\t-\t"
+		printf "${blue}%s${me}\n" "$file";
+	done | column -s $'\t' -t;
+}
+
+# FZF Git
+# fcb - git commit browser
+function fcb {
+  git log --graph --color=always \
+    --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
+}
+
+# fstash - easier way to deal with stashes
+# type fstash to get a list of your stashes
+# enter shows you the contents of the stash
+# ctrl-d shows a diff of the stash against your current HEAD
+# ctrl-b checks the stash out as a branch, for easier merging
+function fgst {
+  local out q k sha
+  while out=$(
+    git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
+    fzf --ansi --no-sort --query="$q" --print-query \
+        --expect=ctrl-d,ctrl-b);
+  do
+    mapfile -t out <<< "$out"
+    q="${out[0]}"
+    k="${out[1]}"
+    sha="${out[-1]}"
+    sha="${sha%% *}"
+    [[ -z "$sha" ]] && continue
+    if [[ "$k" == 'ctrl-d' ]]; then
+      git diff $sha
+    elif [[ "$k" == 'ctrl-b' ]]; then
+      git stash branch "stash-$sha" $sha
+      break;
+    else
+      git stash show -p $sha
+    fi
+  done
+}
+
+# fbr - checkout git branch (including remote branches)
+function fbr {
+  local branches branch
+  branches=$(git branch --all | grep -v HEAD) &&
+    branch=$(echo "$branches" |
+    fzf --delimiter=$(( 2 + $(wc -l <<< "$branches") )) --no-multi --layout=reverse --height=40%) &&
+    git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+# fcoc - checkout git commit
+function fcoc {
+  local commits commit
+  commits=$(git log --pretty=oneline --abbrev-commit --reverse) &&
+  commit=$(echo "$commits" | fzf --tac --no-sort --no-multi --exact) &&
+  git checkout $(echo "$commit" | sed "s/ .*//")
+}
