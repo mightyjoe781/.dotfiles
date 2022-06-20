@@ -102,9 +102,11 @@ map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 "---------------------------------------------------------------------
 " Plug Config
 
-" if filereadable(expand("$HOME") . "/.vim/plug.vim")
-"  source ~/.vim/plug.vim
-" endif 
+" Install vim-plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
 
 call plug#begin('~/.vim/plugged')
 

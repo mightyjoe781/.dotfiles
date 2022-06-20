@@ -11,8 +11,13 @@ set wildignore+=**/android/*
 set wildignore+=**/ios/*
 set wildignore+=**/.git/*
 
-call plug#begin('~/.vim/plugged')
+" Install vim-plug if not found
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
 
+call plug#begin('~/.nvim/plugged')
 
 call plug#end()
 
