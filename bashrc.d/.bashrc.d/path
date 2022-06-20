@@ -2,4 +2,7 @@
 export PATH="$HOME/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/opt/smkbin:$PATH"
-
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/Users/smk/development/flutter/flutter/bin:$PATH"
+export PATH="$HOME/bin/go/bin:$PATH"
+export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"

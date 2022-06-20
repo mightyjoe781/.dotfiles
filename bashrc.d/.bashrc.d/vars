@@ -3,6 +3,7 @@ export AS_SERVER_HOST=whois.ra.net
 export LESS="-a -C -d -e -h20 -i -M -Q -s -w"
 export LESS="-aCdeiMQX"
 export PAGER="less -rF"
+export GOPATH="$HOME/bin/go"
 #export LESSOPEN="| /u/paul/bin/lesspipefilter %s"
 #
 # smk vars
