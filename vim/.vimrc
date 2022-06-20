@@ -135,6 +135,7 @@ call plug#end()
 
 colorscheme gruvbox
 set background=dark
+
 if has("autocmd")
     au BufNewFile,BufRead *.sgml,*.ent,*.xsl,*.xml call Set_SGML()
     au BufNewFile,BufRead *.[1-9] call ShowSpecial()

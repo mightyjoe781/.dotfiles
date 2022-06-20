@@ -25,7 +25,7 @@ function fcda {
 }
 
 # cdf - cd into the directory of the selected file
-function cds {
+function cdf {
   local file
   local dir
   file=$(fzf --query "$1" --no-multi --layout=reverse --height=40%) && dir=$(dirname "$file") && cd "$dir"

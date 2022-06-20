@@ -26,6 +26,11 @@ set expandtab
 set shiftwidth=4
 set softtabstop=4
 
+" defautl split direction for vsplit and split
+" useful in <leader> fw
+set splitright
+set splitbelow
+
 " Install vim-plug if not found
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -36,6 +41,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'morhetz/gruvbox'
     Plug 'tpope/vim-fugitive'
 call plug#end()
-"colorscheme gruvbox
-"set background=dark
 
+colorscheme gruvbox
+set background=dark
+let mapleader=" "
+
+source ~/.config/nvim/cp.vim

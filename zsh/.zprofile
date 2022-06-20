@@ -12,6 +12,7 @@ export FZF_DEFAULT_COMMAND="fd --type f \
   --exclude .localized"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_PREVIEW_COMMAND="cat {}"
+export EDITOR=nvim
 
 # alias g++="g++ --std=gnu++17"
 
