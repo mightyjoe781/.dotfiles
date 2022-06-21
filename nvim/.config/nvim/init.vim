@@ -5,14 +5,7 @@
 " License  : BSD3
 " Author   : smk (sudhanshumohan781@gmail.com)
 "---------------------------------------------------------------------
-set nocompatible
-syntax on
-set noerrorbells visualbell t_vb=
-set hidden              " hides the buffer
-set mouse+=a            " adds mouse support
-set shortmess+=I        " disables startup message
 
-"search restriction
 " Nice menu when typing `:find *.py`
 set wildmode=longest,list,full
 set wildmenu
@@ -24,50 +17,6 @@ set wildignore+=**/node_modules/*
 set wildignore+=**/android/*
 set wildignore+=**/ios/*
 set wildignore+=**/.git/*
-
-set showmatch
-set hlsearch
-
-set encoding=utf-8
-" numbering
-set number
-set relativenumber
-" search
-set incsearch           " incremental search
-set ignorecase          " ignore case of search term
-set smartcase           " case sensitive if search term has upper letters
-" column restriction
-set textwidth=78
-set nowrap
-set cc=80               " color column
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-" indentation
-" set backspace=ident,eol,start
-set tabstop=4           " default tab length
-set expandtab           " convert tabs into spaces
-set shiftwidth=4        " automatic tabs default length
-set softtabstop=4       " cursor movement length on tab
-" smart indentation is obsolete, use autoindent
-set autoindent
-filetype plugin indent on
-" open splits panes to right and bottom
-set splitright
-set splitbelow
-" remove arrow keys
-nnoremap <Left>  :echoe "Use h"<CR> 
-nnoremap <Right> :echoe "Use l"<CR> 
-nnoremap <Up>    :echoe "Use k"<CR> 
-nnoremap <Down>  :echoe "Use j"<CR>
-" ...and in insert mode
-inoremap <Left>  <ESC>:echoe "Use h"<CR> 
-inoremap <Right> <ESC>:echoe "Use l"<CR> 
-inoremap <Up>    <ESC>:echoe "Use k"<CR> 
-inoremap <Down>	 <ESC>:echoe "Use j"<CR>
-" quicker window movement
-nnoremap <C-j> <C-w>j 
-nnoremap <C-k> <C-w>k 
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
 " remove some mappings
 nmap Q <Nop>
 " shows status bar below
@@ -81,14 +30,14 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-    Plug 'morhetz/gruvbox'
+    Plug 'gruvbox-community/gruvbox'        " themes
     Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-surround'    
-    Plug 'scrooloose/syntastic'
-    Plug 'junegunn/fzf.vim'
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'mbbill/undotree'
-
+    Plug 'tpope/vim-surround'               " surrounds 
+    Plug 'scrooloose/syntastic'             " syntax
+    Plug 'nvim-lua/plenary.nvim'            " libraries lua
+    Plug 'nvim-telescope/telescope.nvim'    " fzf based file search
+    Plug 'mbbill/undotree'                  " undo tree
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 let mapleader=" "
@@ -107,5 +56,17 @@ set undofile
 nnoremap <silent> <C-f> :Files<CR>
 nnoremap <silent> <leader>f :Rg<CR>
 
-" Competitive Coding setup
-source ~/.config/nvim/cp.vim
+" Plugin Telescope
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Using Lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+

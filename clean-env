@@ -1,4 +1,6 @@
 #!/usr/bin/env zsh
+# --> stow folders
+STOW_FOLDERS="bin,screen,sublime,personal,tmux,vim,zsh"
 pushd $DOTFILES
 for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
 do
