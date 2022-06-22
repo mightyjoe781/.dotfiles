@@ -32,18 +32,24 @@ call plug#begin('~/.vim/plugged')
     Plug 'gruvbox-community/gruvbox'        " themes
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'               " surrounds
-    Plug 'scrooloose/syntastic'             " syntax
+    " Plug 'scrooloose/syntastic'             " syntax
     Plug 'nvim-lua/plenary.nvim'            " libraries lua
     " Plenary library based lsp-plugins
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/cmp-path'
     Plug 'hrsh7th/nvim-cmp'
-    Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
+
+    " For luasnip users.
+    Plug 'L3MON4D3/LuaSnip'
+    Plug 'saadparwaiz1/cmp_luasnip'
+
+    " no idea
     Plug 'onsails/lspkind-nvim'
     Plug 'nvim-lua/lsp_extensions.nvim'
 
-    Plug 'junnplus/nvim-lsp-setup'
+    " Plug 'junnplus/nvim-lsp-setup'
     Plug 'williamboman/nvim-lsp-installer'
 
     Plug 'nvim-telescope/telescope.nvim'    " fzf based file search
@@ -117,5 +123,4 @@ augroup SMK
 augroup END
 
 " lua require("smk.lsp")
-" lua require("nvim-lsp-setup")
 lua require("lsp")
