@@ -34,7 +34,7 @@ bash install.sh
 # you can symlink vim to be nvim
 ln -s (which nvim) /usr/local/vim
 
-# Step(Optional) : Setup Apple's SFMono NerdFonts
+# Step(Optional) : Setup Apple's SFMono NerdFonts (MacOS)
 
 # Nerd Fonts are already patched fonts that support Glyphs, for fonts that
 # do not have Nerd Font available can be patched using Nerd Patcher.
@@ -46,3 +46,17 @@ ln -s (which nvim) /usr/local/vim
 # Font size : 14, SF Mono Regular
 git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized sfmono
 
+# Using homebrew to download the new fonts
+# brew install --cask font-<FONT_NAME>-nerd-font
+
+brew tap homebrew/cask-fonts
+brew install --cask font-hack-nerd-font
+
+# Step : Setup fonts on Linux
+
+# For Ubuntu 22.04 : Following fonts are preffered and works in order
+# nerdfonts.com
+# Fira Mono, Hack Nerd Mono, JetBrains Mono (kinda times new roman), Roboto Mono (Large Font)
+
+# Extract downloaded zip files in ~/.fonts folder and execute following lines
+fc-cache -fv
