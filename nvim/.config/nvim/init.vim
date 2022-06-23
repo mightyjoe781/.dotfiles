@@ -63,18 +63,17 @@ call plug#begin('~/.vim/plugged')
     Plug 'flazz/vim-colorschemes'
     Plug 'chriskempson/base16-vim'
 
-    " Neovim Tree shitter
+    " Neovim Tree sitter
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/playground'
     Plug 'romgrk/nvim-treesitter-context'
+
     " lualine
     Plug 'nvim-lualine/lualine.nvim'
     " If you want to have icons in your statusline choose one of these
     Plug 'kyazdani42/nvim-web-devicons'
+
 call plug#end()
-
-" lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
-
 
 let mapleader=" "
 

@@ -42,7 +42,48 @@ end
 
 -- move lspconfig to bottom after configuring luasnip
 
--------auto-----complete------
+--
+-- Lspconfig
+--
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+
+require("nvim-lsp-installer").setup {} -- for nvim-lsp-installer plugin
+-- cmp hook for client-server capabilities exchange
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+local servers = { "gopls", "tsserver", "sumneko_lua", "pyright", "solargraph", "clangd" }
+for _, lsp in pairs(servers) do
+	require("lspconfig")[lsp].setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		flags = {
+			-- This will be the default in neovim 0.7+
+			debounce_text_changes = 150,
+		},
+	})
+end
+
+
+-- remove warnings in lua
+-- modularize into separate files
+require'lspconfig'.sumneko_lua.setup {
+    -- ... other configs
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim','minetest' }
+            }
+        }
+    }
+}
+
+--
+-- Nvim-cmp
+--
+
+-- Setup autocomplete
 opt.completeopt = { "menu", "menuone", "noselect" }
 
 -- Setup nvim-cmp.
@@ -54,7 +95,6 @@ end
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 local lspkind = require('lspkind')
-
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -101,7 +141,16 @@ cmp.setup({
         { name = "path" },
 	}),
     formatting = {
-        format = lspkind.cmp_format()
+        format = lspkind.cmp_format({
+            mode = "symbol_text",
+            menu = ({
+              buffer = "[Buffer]",
+              nvim_lsp = "[LSP]",
+              luasnip = "[LuaSnip]",
+              nvim_lua = "[Lua]",
+              latex_symbols = "[Latex]",
+            })
+        }),
     },
 })
 
@@ -113,36 +162,41 @@ cmp.setup.filetype("gitcommit", {
 	}),
 })
 
+--
+-- Null-ls
+--
 
--- Setup lspconfig.
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
+local null_ls = require('null-ls')
 
-require("nvim-lsp-installer").setup {} -- for lsp-installer plugin
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- null-ls is a general purpose language server that doesn't need
+-- the same config as actual language servers like tsserver, so
+-- setup is a little different.
+null_ls.setup({
+    sources = {
+        -- prettierd is installed globally via npm
+        null_ls.builtins.formatting.prettierd
+    },
+    on_attach = function(client, bufnr)
+        -- Autoformat
+        if client.resolved_capabilities.document_formatting then
+           vim.cmd [[augroup Format]]
+           vim.cmd [[autocmd! * <buffer>]]
+           vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+           vim.cmd [[augroup END]]
+        end
+        -- call local on_attach
+        return on_attach(client, bufnr)
+    end
+})
 
-local servers = { "gopls", "tsserver", "sumneko_lua", "pyright", "solargraph", "clangd" }
-for _, lsp in pairs(servers) do
-	require("lspconfig")[lsp].setup({
-		capabilities = capabilities,
-		on_attach = on_attach,
-		flags = {
-			-- This will be the default in neovim 0.7+
-			debounce_text_changes = 150,
-		},
-	})
+--
+-- Diagnostics
+--
+
+-- Set diganostic sign icons
+-- https://github.com/neovim/nvim-lspconfig/wiki/UI-customization#change-diagnostic-symbols-in-the-sign-column-gutter
+local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
+for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
-
-
--- remove warnings in lua
-require'lspconfig'.sumneko_lua.setup {
-    -- ... other configs
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim','minetest' }
-            }
-        }
-    }
-}
-
