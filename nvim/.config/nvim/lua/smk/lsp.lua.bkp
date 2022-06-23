@@ -41,24 +41,8 @@ local on_attach = function(_, bufnr)
 	api.nvim_buf_set_keymap(bufnr, "n", "<space>f", "<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
 end
 
--- Setup lspconfig.
+-- move lspconfig to bottom after configuring luasnip
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-
-require("nvim-lsp-installer").setup {}
-
-local servers = { "gopls", "tsserver", "sumneko_lua", "pyright", "solargraph", "clangd" }
-for _, lsp in pairs(servers) do
-	require("lspconfig")[lsp].setup({
-		capabilities = capabilities,
-		on_attach = on_attach,
-		flags = {
-			-- This will be the default in neovim 0.7+
-			debounce_text_changes = 150,
-		},
-	})
-end
 
 -------auto-----complete------
 opt.completeopt = { "menu", "menuone", "noselect" }
@@ -117,8 +101,20 @@ cmp.setup({
 		{ name = "buffer" },
         { name = "path" },
 	}),
-    formatting = {
-      format = lspkind.cmp_format()
+      formatting = {
+        format = lspkind.cmp_format({
+          mode = 'symbol', -- show only symbol annotations
+          maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+
+          -- The function below will be called before any actual modifications from lspkind
+          -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+          --[[
+            before = function (entry, vim_item)
+            ...
+            return vim_item
+            end
+          --]]
+        })
     },
 })
 
@@ -129,3 +125,35 @@ cmp.setup.filetype("gitcommit", {
 		{ name = "buffer" },
 	}),
 })
+
+
+-- Setup lspconfig.
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+
+require("nvim-lsp-installer").setup {}
+
+local servers = { "gopls", "tsserver", "sumneko_lua", "pyright", "solargraph", "clangd" }
+for _, lsp in pairs(servers) do
+	require("lspconfig")[lsp].setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		flags = {
+			-- This will be the default in neovim 0.7+
+			debounce_text_changes = 150,
+		},
+	})
+end
+
+-- remove warnings in lua
+require'lspconfig'.sumneko_lua.setup {
+    -- ... other configs
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim','minetest' }
+            }
+        }
+    }
+}

@@ -20,7 +20,7 @@ set wildignore+=**/.git/*
 " remove some mappings
 " shows status bar below
 set laststatus=2
-set statusline=%-4m%f\ %y\ \ %=%{&ff}\ \|\ %{&fenc}\ [%l:%c]
+" set statusline=%-4m%f\ %y\ \ %=%{&ff}\ \|\ %{&fenc}\ [%l:%c]
 
 " Install vim-plug if not found
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
@@ -35,31 +35,29 @@ call plug#begin('~/.vim/plugged')
     " Plug 'scrooloose/syntastic'             " syntax
     Plug 'nvim-lua/plenary.nvim'            " libraries lua
     " Plenary library based lsp-plugins
-    Plug 'neovim/nvim-lspconfig'
+    Plug 'hrsh7th/nvim-cmp'                 " main plugin
+    Plug 'neovim/nvim-lspconfig'            " dependency of nvim-cmp
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/cmp-path'
-    Plug 'hrsh7th/nvim-cmp'
 
     " For luasnip users.
-    Plug 'L3MON4D3/LuaSnip'
-    Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'L3MON4D3/LuaSnip'                 " autocomplete snippets
+    Plug 'saadparwaiz1/cmp_luasnip'         " no idea what is does,required
+    Plug 'onsails/lspkind-nvim'             " autocompletion icons
 
     " no idea
-    Plug 'onsails/lspkind-nvim'
     Plug 'nvim-lua/lsp_extensions.nvim'
 
-    " Plug 'junnplus/nvim-lsp-setup'
+    " installer for lsp language
     Plug 'williamboman/nvim-lsp-installer'
 
-    Plug 'nvim-telescope/telescope.nvim'    " fzf based file search
     Plug 'mbbill/undotree'                  " undo tree
 
-    " telescope requirements...
+    " telescope (requires plenary).
     Plug 'nvim-lua/popup.nvim'
-    Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
-    Plug 'nvim-telescope/telescope-fzy-native.nvim'
+    Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make' }
 
     Plug 'vim-conf-live/vimconflive2021-colorscheme'
     Plug 'flazz/vim-colorschemes'
@@ -69,10 +67,13 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/playground'
     Plug 'romgrk/nvim-treesitter-context'
-
+    " lualine
+    Plug 'nvim-lualine/lualine.nvim'
+    " If you want to have icons in your statusline choose one of these
+    Plug 'kyazdani42/nvim-web-devicons'
 call plug#end()
 
-lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
+" lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
 
 
 let mapleader=" "
@@ -122,5 +123,4 @@ augroup SMK
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END
 
-" lua require("smk.lsp")
-lua require("lsp")
+lua require("smk")

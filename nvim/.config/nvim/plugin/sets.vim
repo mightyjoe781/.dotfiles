@@ -42,3 +42,6 @@ set splitbelow
 
 set cmdheight=1
 set updatetime=50
+
+set scrolloff=8
+
