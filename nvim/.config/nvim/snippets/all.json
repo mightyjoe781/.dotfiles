@@ -1,0 +1,21 @@
+{
+	"author": {
+		"scope":  "",
+		"prefix": "file",
+		"body": [
+			"$BLOCK_COMMENT_START",
+			"* --------------------------------------------------------------------",
+			"* @file    $1",
+			"* @brief   $2",
+			"* @author  smk (smk@it.ca)",
+			"* @version ${4:$CURRENT_YEAR$CURRENT_MONTH$CURRENT_DATE}",
+			"* @license ${5:BSD3}",
+			"* @bugs    No know bugs",
+			"* --------------------------------------------------------------------",
+			"$BLOCK_COMMENT_END",
+			"",
+			"$7"
+		],
+		"description": "Adds basic header to file."
+	}
+}

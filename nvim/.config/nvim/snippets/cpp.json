@@ -1,0 +1,92 @@
+{
+    "ccboiler": {
+		"scope": "cpp",
+		"prefix": "codeforces",
+		"body": [
+			"/* Standard Libraries and Macros */",
+			"",
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"typedef long long ll;",
+			"const int INF = 1e9;",
+			"#define fi first",
+			"#define se second",
+			"#define FOR(i,n) for(int (i)=0;(i)<(n);++(i))",
+			"#define dbg(vari) cerr << #vari<< \" = \"<< (vari) <<endl;",
+			"$1",
+			"",
+			"/* Main */",
+			"",
+			"int main(){",
+			"",
+			"\tios_base::sync_with_stdio(false);",
+			"\tcin.tie(NULL);",
+			"\t#ifndef ONLINE_JUDGE",
+			"\tfreopen(\"input.txt\", \"r\", stdin);",
+			"\tfreopen(\"output.txt\", \"w\", stdout);",
+			"\t#endif",
+			"",
+			"\t$2",
+			"",
+			"\treturn 0;",
+			"}"
+		],
+		"description": "Adds a competitive coding boilerplate."
+	},
+	"Macro-1" :{
+		"scope": "cpp",
+		"prefix": "mac1",
+		"body": [
+			"/* Macro Utility-1 */",
+			"",
+			"#define pb push_back",
+			"#define mp make_pair",
+			"#define pii pair<int,int>",
+			"#define vi vector<int>",
+			"#define vpii vector<pii>",
+			"#define SZ(x) ((int)(x.size()))",
+			"#define fi first",
+			"#define se second",
+			""
+
+		],
+		"description": "Adds Macro-utility 1"
+
+	},
+	"Macro-2" :{
+		"scope": "cpp",
+		"prefix": "mac2",
+		"body": [
+			"/* Macro Utility-2 */",
+			"",
+			"#define FOR(i,n) for(int (i)=0;(i)<(n);++(i))",
+			"#define FORI(i,n) for(int (i)=1;(i)<=(n);++(i))",
+			"#define IN(x,y) ((y).find((x))!=(y).end())",
+			"#define ALL(t) t.begin(),t.end()",
+			"#define FORE(i,w) for(__typeof(w.begin())i=w.begin();i!=w.end();++i)",
+			"#define REP(i,a,b) for(int (i)=(a);(i)<=(b);++i)",
+			"#define REPD(i,a,b) for(int (i)=(a); (i)>=(b);--i)",
+			"#define REMAX(a,b) (a)=max((a),(b));",
+			"#define REMIN(a,b) (a)=min((a),(b));",
+			"#define DBG cerr << \"debug here\" << endl;",
+			"#define dbg(vari) cerr << #vari<< \" = \"<< (vari) <<endl;",
+			"#define dee(w) {cerr<<#w<<\" = \";FORE(i,w)cerr<<*i<<\", \";cerr<<\"\\n\";}",
+			""
+
+		],
+		"description": "Adds Macro-utility 2"
+	},
+	"Debug-Macro" :{
+		"scope": "cpp",
+		"prefix": "macd",
+		"body": [
+			"/* Debug Macros */",
+			"",
+			"#define DBG cerr << \"debug here\" << endl;",
+			"#define dbg(vari) cerr << #vari<< \" = \"<< (vari) <<endl;",
+			"#define dee(w) {cerr<<#w<<\" = \";FORE(i,w)cerr<<*i<<\", \";cerr<<\"\\n\";}",
+			""
+		],
+		"description": "Adds Macro-utility 2"
+	}
+}
