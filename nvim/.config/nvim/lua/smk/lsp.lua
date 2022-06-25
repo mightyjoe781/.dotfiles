@@ -53,7 +53,7 @@ require("nvim-lsp-installer").setup {} -- for nvim-lsp-installer plugin
 -- cmp hook for client-server capabilities exchange
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-local servers = { "gopls", "tsserver", "sumneko_lua", "pyright", "solargraph", "clangd", "bashls" }
+local servers = { "gopls", "tsserver", "sumneko_lua", "pyright", "clangd", "bashls", "jdtls" }
 for _, lsp in pairs(servers) do
 	require("lspconfig")[lsp].setup({
 		capabilities = capabilities,

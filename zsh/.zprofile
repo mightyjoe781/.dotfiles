@@ -14,13 +14,16 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_PREVIEW_COMMAND="cat {}"
 export EDITOR=nvim
 
+#export JAVA_HOME=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-18.0.1.1.jdk/Contents/Home
+
 # alias g++="g++ --std=gnu++17"
 
 # source all files in .zshrc.d
-if [[ -d $HOME/.zshrc.d ]]; then 
+if [[ -d $HOME/.zshrc.d ]]; then
     for _f in $HOME/.zshrc.d/*; do
-        if [[ -x "$_f" ]] && [[ -f "$_f" ]]; then 
+        if [[ -x "$_f" ]] && [[ -f "$_f" ]]; then
             source $_f
-        fi 
-    done 
+        fi
+    done
 fi
