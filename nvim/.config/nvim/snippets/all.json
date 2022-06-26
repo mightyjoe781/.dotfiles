@@ -1,5 +1,5 @@
 {
-	"author": {
+	"file_header": {
 		"scope":  "",
 		"prefix": "file",
 		"body": [
@@ -7,10 +7,10 @@
 			"* --------------------------------------------------------------------",
 			"* @file    $1",
 			"* @brief   $2",
-			"* @author  smk (smk@it.ca)",
+			"* @author  smk (sudhanshumohan781@gmail.com)",
 			"* @version ${4:$CURRENT_YEAR$CURRENT_MONTH$CURRENT_DATE}",
 			"* @license ${5:BSD3}",
-			"* @bugs    No know bugs",
+			"* @bugs    No known bugs",
 			"* --------------------------------------------------------------------",
 			"$BLOCK_COMMENT_END",
 			"",
