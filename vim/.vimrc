@@ -92,6 +92,11 @@ nnoremap <C-l> <C-w>l
 "--------------------------------------------------------------------
 " Basic-Config 2
 
+" Warns vim on linux/windows to treat <C-v> or <C-shift-v> as paste
+" and automatically adjust autoindent accordingly.
+" Putting from (clipboard)+ or (selection)* registers don't need this.
+set pastetoggle=<f5>
+
 " common typos
 command! -bang Q q<bang>
 command! -bang W w<bang>
@@ -112,8 +117,16 @@ call plug#begin('~/.vim/plugged')
 
 " Utilities
 
+" Tim-Pope Classics
+Plug 'tpope/vim-fugitive'        " Git Wrapper
+Plug 'tpope/vim-surround'        " Adds `s` command
+Plug 'tpope/vim-commentary'      " Adds comment actions
+Plug 'tpope/vim-unimpaired'      " Adds various [ and ] commands
+Plug 'tpope/vim-repeat'          " Remap '.' key
+
+Plug 'airblade/vim-gitgutter'    " Git-gutter plugin
+
 Plug 'jremmen/vim-ripgrep'
-Plug 'tpope/vim-fugitive'
 " original ctrp is not maintained anymore
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 " Requires vim built with python 3.7+
@@ -121,7 +134,8 @@ Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 Plug 'mbbill/undotree'
 
 " Themes
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 " Plug 'altercation/vim-colors-solarized'
 
 " Syntax and AutoCompletion
