@@ -127,6 +127,7 @@ Plug 'tpope/vim-repeat'          " Remap '.' key
 Plug 'airblade/vim-gitgutter'    " Git-gutter plugin
 
 Plug 'jremmen/vim-ripgrep'
+Plug 'scrooloose/nerdtree'
 " original ctrp is not maintained anymore
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 " Requires vim built with python 3.7+
@@ -144,12 +145,26 @@ Plug 'leafgarland/typescript-vim'
 " YCM requires python3.8 and cmake
 " Plug 'valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang --gocode-completer' }
 
-
 call plug#end()
 
+" ----- PLUGIN SETTINGS -----
+let g:mapleader=' '           " leader key
+set history=5000
+set showcmd
+set nojoinspaces
+set complete-=t
+
+" ----- NERDTree -----
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+" ----- Gruvbox -----
 colorscheme gruvbox
 set background=dark
 
+" ----- Some Special Configs for XMLs -----
 if has("autocmd")
     au BufNewFile,BufRead *.sgml,*.ent,*.xsl,*.xml call Set_SGML()
     au BufNewFile,BufRead *.[1-9] call ShowSpecial()
