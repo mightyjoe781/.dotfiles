@@ -51,7 +51,7 @@ end
 
 require("nvim-lsp-installer").setup {} -- for nvim-lsp-installer plugin
 -- cmp hook for client-server capabilities exchange
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local servers = { "gopls", "tsserver", "sumneko_lua", "pyright", "clangd", "bashls", "jdtls", "vimls" }
 for _, lsp in pairs(servers) do
@@ -166,29 +166,25 @@ cmp.setup.filetype("gitcommit", {
 -- Null-ls
 --
 
-local null_ls = require('null-ls')
-
 -- null-ls is a general purpose language server that doesn't need
 -- the same config as actual language servers like tsserver, so
 -- setup is a little different.
-null_ls.setup({
-    sources = {
-        -- prettierd is installed globally via npm
-        null_ls.builtins.formatting.prettierd
-    },
-    on_attach = function(client, bufnr)
-        -- Autoformat
-        if client.resolved_capabilities.document_formatting then
-           vim.cmd [[augroup Format]]
-           vim.cmd [[autocmd! * <buffer>]]
-           vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
-           vim.cmd [[augroup END]]
-        end
-        -- call local on_attach
-        return on_attach(client, bufnr)
-    end
-})
 
+local null_ls = require("null-ls")
+local sources = {
+	null_ls.builtins.formatting.trim_newlines.with({
+		disabled_filetypes = { "rust" }, -- use rustfmt
+	}),
+	null_ls.builtins.formatting.trim_whitespace.with({
+		disabled_filetypes = { "rust" }, -- use rustfmt
+	}),
+	null_ls.builtins.formatting.stylua,
+	null_ls.builtins.formatting.shfmt,
+	null_ls.builtins.formatting.prettier.with({
+		filetypes = { "html", "css", "yaml", "markdown", "json" },
+	}),
+}
+--null_ls.setup({ sources = sources })
 --
 -- Diagnostics
 --

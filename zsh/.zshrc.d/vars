@@ -7,5 +7,7 @@ export LESS="-aCdeiMQX"
 export PAGER="less -rF"
 export GOPATH="$HOME/bin/go"
 export DOTFILES=$HOME/.dotfiles
+export minetest="/opt/homebrew/opt/minetest/minetest.app/Contents/MacOS/minetest"
+export ctags="/opt/homebrew/bin/ctags"
 #export TTY=$(tty)
 #export GPG_TTY=$TTY

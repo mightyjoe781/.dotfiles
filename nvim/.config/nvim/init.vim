@@ -6,8 +6,7 @@
 " Author   : smk (sudhanshumohan781@gmail.com)
 "---------------------------------------------------------------------
 
-" Nice menu when typing `:find *.py`
-set wildmode=longest,list,full
+" Nice menu when typing `:find *.py` set wildmode=longest,list,full
 set wildmenu
 " Ignore files
 set wildignore+=*.pyc
@@ -99,10 +98,10 @@ nnoremap <leader>u :UndotreeShow<cr>
 
 " Plugin Telescope
 " Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+"nnoremap <leader>ff <cmd>Telescope find_files<cr>
+"nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+"nnoremap <leader>fb <cmd>Telescope buffers<cr>
+"nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " Using Lua functions
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>

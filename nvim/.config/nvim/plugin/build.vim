@@ -63,8 +63,8 @@ if g:os == 'Darwin'
     " Require g++ from homebrew installed
     " command! -nargs=0 CppRun call TermWrapper(printf('g++-11 -std=c++11 -DLOCAL=1 %s && ./a.out', expand('%')))
     " command! -nargs=0 CppBuild  call TermWrapper(printf('g++-11 -std=c++11 -DLOCAL=1 %s', expand('%')))
-    command! -nargs=0 CppRun call TermWrapper(printf('\g++-11 -std=c++11 -Wall -Wextra -pedantic -O3 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -DLOCAL %s && ./a.out', expand('%')))
-    command! -nargs=0 CppBuild  call TermWrapper(printf('\g++-11 -std=c++11 -Wall -Wextra -pedantic -O3 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -DLOCAL %s', expand('%')))
+    command! -nargs=0 CppRun call TermWrapper(printf('\g++-12 -std=c++11 -Wall -Wextra -pedantic -O3 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -DLOCAL %s && ./a.out', expand('%')))
+    command! -nargs=0 CppBuild  call TermWrapper(printf('\g++-12 -std=c++11 -Wall -Wextra -pedantic -O3 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -DLOCAL %s', expand('%')))
 else
     " command! -nargs=0 CppRun call TermWrapper(printf('g++ -std=c++11 -DLOCAL=1 %s && ./a.out', expand('%')))
     " command! -nargs=0 CppBuild  call TermWrapper(printf('g++ -std=c++11 -DLOCAL=1 %s', expand('%')))
@@ -115,4 +115,12 @@ command! -nargs=0 GoRun call TermWrapper(printf('go run %s', expand('%')))
 augroup GoToolkit
 	autocmd!
 	autocmd FileType go nnoremap <leader>fr :GoRun<CR>
+augroup END
+
+" --- Rust Cargo Builder ---
+
+command! -nargs=0 CargoRun call TermWrapper(printf('cargo run'))
+augroup CargoToolkit
+	autocmd!
+	autocmd FileType rust nnoremap <leader>fr :CargoRun<CR>
 augroup END
