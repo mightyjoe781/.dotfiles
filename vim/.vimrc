@@ -142,6 +142,7 @@ Plug 'gruvbox-community/gruvbox'
 " Syntax and AutoCompletion
 Plug 'scrooloose/syntastic'
 Plug 'leafgarland/typescript-vim'
+Plug 'puremourning/vimspector'
 " YCM requires python3.8 and cmake
 " Plug 'valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang --gocode-completer' }
 
@@ -164,6 +165,19 @@ nnoremap <C-f> :NERDTreeFind<CR>
 colorscheme gruvbox
 set background=dark
 
+" ----- Viminspector -----
+nnoremap <Leader>dd :call vimspector#Launch()<CR>
+nnoremap <Leader>de :call vimspector#Reset()<CR>
+nnoremap <Leader>dc :call vimspector#Continue()<CR>
+
+nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>
+
+nmap <Leader>dh <Plug>VimspectorRestart
+nmap <Leader>dl <Plug>VimspectorStepOut
+nmap <Leader>dk <Plug>VimspectorStepInto
+nmap <Leader>dj <Plug>VimspectorStepOver
+
 " ----- Some Special Configs for XMLs -----
 if has("autocmd")
     au BufNewFile,BufRead *.sgml,*.ent,*.xsl,*.xml call Set_SGML()
@@ -183,23 +197,4 @@ function ShowSpecial()
     return 0
 endfunction " ShowSpecial()
 
-function Set_SGML()
-    setlocal number
-    syn match sgmlSpecial "&[^;]*;"
-    setlocal syntax=sgml
-    setlocal filetype=xml
-    setlocal shiftwidth=2
-    setlocal textwidth=70
-    setlocal tabstop=8
-    setlocal softtabstop=2
-    setlocal formatprg="fmt -p"
-    setlocal autoindent
-    setlocal smartindent
-    " Rewrap paragraphs
-    noremap P gqj
-    " Replace spaces with tabs
-    noremap T :s/        /\t/<CR>
-    call ShowSpecial()
-    call Set_Highlights()
-    return 0
-endfunction " Set_SGML()
+

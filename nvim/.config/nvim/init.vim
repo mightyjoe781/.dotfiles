@@ -71,6 +71,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-lualine/lualine.nvim'
     " If you want to have icons in your statusline choose one of these
     Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'zbirenbaum/copilot.lua'
 
 call plug#end()
 
