@@ -1,0 +1,25 @@
+
+# Summary of all new-commands functions in the repo's dotfiles
+# --- GIT --- #
+# fcb - git commit browser
+# fgst - (wip) 
+# fbr - checkout git branch (including remote branches)
+# fcoc - checkout git commit
+
+# --- MOVEMENT --- #
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+# fcd - cd to selected directory
+# fcda - cd search including hidden directories
+# cdf  - cd into the directory of the selected file
+# fta - Tmux (need to be fixed)
+
+
+
+# ttps
+# dls
+# fromhex $1
+# tohex $1
+# hex2dec $1
+# hex2ip $1
+# ip2hex $1
+# urlencode $1
