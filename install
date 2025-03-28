@@ -1,6 +1,6 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 # Add these two lines to bashrc
-STOW_FOLDERS="bin,screen,sublime,personal,tmux,vim,zsh"
+STOW_FOLDERS="bin,screen,personal,tmux,vim,zsh"
 pushd $DOTFILES
 for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
 do
