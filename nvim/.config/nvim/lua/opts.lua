@@ -61,6 +61,7 @@ Mytabline = function ()
 end
 vim.api.nvim_set_option('tabline', '%!v:lua.Mytabline()')
 vim.opt.showtabline = 2 -- show tabline always
+vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
 
 vim.diagnostic.config({
   float = {
