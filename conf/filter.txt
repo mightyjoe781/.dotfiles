@@ -1,0 +1,41 @@
+# === System configuration files ===
++ /etc/**
+- /etc/mtab
+- /etc/resolv.conf
+- /etc/hostname
+- /etc/hosts
+- /etc/adjtime
+
+# === SSH keys and user data ===
++ /root/**
++ /home/**
+
+# === Web servers and web apps ===
++ /var/www/**
++ /etc/nginx/**
++ /etc/letse/**
+
+# === Databases and important services ===
+# + /var/lib/mysql/**       # (if you use MySQL)
+# + /var/lib/postgresql/**  # (if you use PostgreSQL)
+# + /var/lib/redis/**        # (if Redis)
+
+# === Mail systems ===
++ /var/mail/**
+# + /var/spool/mail/**
+# + /etc/postfix/**
+# + /etc/dovecot/**
+
+# === Special services ===
++ /opt/smkbin/**  # you mentioned /opt/search/
+
+# === Logs (optional) ===
++ /var/log/**
+
+# === SSH and Sudo ===
++ /etc/ssh/**
++ /etc/sudoers.d/**
++ /etc/sudoers
+
+# === Default deny everything else ===
+- *
