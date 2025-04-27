@@ -7,6 +7,14 @@
 - /etc/adjtime
 
 # === SSH keys and user data ===
+- /root/.cache/**
+- /home/*/.cache/**
+- .npm/**
+- .cargo/**/target/**
+- .vscode-server/**
+- node_modules/**
+- target/**
+- tmp/**
 + /root/**
 + /home/**
 
@@ -16,9 +24,9 @@
 + /etc/letse/**
 
 # === Databases and important services ===
-# + /var/lib/mysql/**       # (if you use MySQL)
-# + /var/lib/postgresql/**  # (if you use PostgreSQL)
-# + /var/lib/redis/**        # (if Redis)
+# + /var/lib/mysql/**       
+# + /var/lib/postgresql/**  
+# + /var/lib/redis/**        
 
 # === Mail systems ===
 + /var/mail/**
@@ -27,10 +35,10 @@
 # + /etc/dovecot/**
 
 # === Special services ===
-+ /opt/smkbin/**  # you mentioned /opt/search/
++ /opt/smkbin/**  
 
 # === Logs (optional) ===
-+ /var/log/**
+# + /var/log/**
 
 # === SSH and Sudo ===
 + /etc/ssh/**
