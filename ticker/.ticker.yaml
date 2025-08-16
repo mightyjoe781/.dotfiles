@@ -1,0 +1,78 @@
+# ~/.ticker.yaml
+# Market monitoring configuration organized by asset classes and holdings
+
+# Legacy flat watchlist (remove if using groups only)
+# watchlist:
+#   - BTC-USD
+#   - ETH-USD
+#   - ^NSEI
+#   - ^NSEBANK
+
+# Color scheme optimized for terminal visibility
+colors:
+  text: "#005fff"              # Primary text - bright blue
+  text-light: "#0087ff"        # Secondary text - lighter blue  
+  text-label: "#00d7ff"        # Labels - cyan blue
+  text-line: "#00ffff"         # Chart lines - bright cyan
+  text-tag: "#005fff"          # Tags - matching primary
+  background-tag: "#0087ff"    # Tag backgrounds - light blue
+
+# Groups with proper structure for ticker tool
+groups:
+  - name: indian_equity
+    watchlist:
+      - ^NSEI
+      - ^NSEBANK
+      - ^CNXIT
+      - ^CNXAUTO
+      - ^CNXFMCG
+      - ^CNXPHARMA
+      - ^CNXMETAL
+      - ^CNXENERGY
+
+  - name: crypto
+    watchlist:
+      - BTC-USD
+      - ETH-USD
+    
+  - name: global_equity
+    watchlist:
+      - ^GSPC
+      - ^NDX
+      - ^FTSE
+      - ^N225
+      - ^HSI
+      - 000001.SS
+    
+  - name: currencies
+    watchlist:
+      - INR=X
+      - DX-Y.NYB
+      - EURUSD=X
+      - JPY=X
+      
+  - name: commodities
+    watchlist:
+      - GC=F
+      - SI=F
+      - PL=F
+      - PA=F
+      - HG=F
+      - ALI=F
+      - CL=F
+      - BZ=F
+      - NG=F
+    
+  - name: risk_indicators
+    watchlist:
+      - ^VIX
+      - ^TNX
+      - ^INDIAVIX
+
+# Display preferences
+refresh: 5s              # Refresh interval
+show-tags: true          # Show asset tags
+show-fundamentals: true  # Show P/E, market cap etc.
+show-separator: true     # Visual separators between groups
+compact: false          # Use compact view
+sort: "alpha"           # Sort by: alpha, percent, value
