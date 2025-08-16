@@ -12,8 +12,7 @@ fi
 STOW_FOLDERS="bin,screen,personal,tmux,vim,zsh,ticker"
 
 pushd "$DOTFILES" || { echo "Failed to change directory to \$DOTFILES"; exit 1; }
-for folder in $(echo "$STOW_FOLDERS" | sed "s/,/ /g")
-pushd $DOTFILES
+
 for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
 do
     stow -D "$folder"
