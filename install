@@ -1,11 +1,23 @@
 #!/usr/bin/env bash
 # Add these two lines to bashrc
+#
+# Root user should not install any of the configs
+
+# Exit if the script is run as root
+if [ "$EUID" -eq 0 ]; then
+  echo "Error: This script should not be run as root." >&2
+  exit 1
+fi
+
 STOW_FOLDERS="bin,screen,personal,tmux,vim,zsh,ticker"
+
+pushd "$DOTFILES" || { echo "Failed to change directory to \$DOTFILES"; exit 1; }
+for folder in $(echo "$STOW_FOLDERS" | sed "s/,/ /g")
 pushd $DOTFILES
 for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
 do
-    stow -D $folder
-    stow $folder
-	echo "Installed $folder"
+    stow -D "$folder"
+    stow "$folder"
+    echo "Installed $folder"
 done
 popd
