@@ -32,14 +32,20 @@ Plug 'scrooloose/nerdtree'
 -- original ctrp is not maintained anymore
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 -- Requires vim built with python 3.7+
-Plug 'lyuts/vim-rtags'
-
+-- Plug 'lyuts/vim-rtags'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 -- Telescope file finder / picker, two above it are dependencies
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'stevearc/dressing.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
+
 
 -- Project management
 Plug 'nvim-telescope/telescope-project.nvim'
@@ -56,12 +62,5 @@ vim.call('plug#end')
 -- set the colorscheme to solarized
 vim.cmd.colorscheme('gruvbox')
 
-
-
-
 require('telescope_setup')
-
-
-
-
 

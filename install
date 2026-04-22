@@ -9,7 +9,7 @@ if [ "$EUID" -eq 0 ]; then
   exit 1
 fi
 
-STOW_FOLDERS="bin,screen,personal,tmux,vim,zsh,ticker"
+STOW_FOLDERS="bin,screen,personal,tmux,vim,zsh,ticker,aerospace"
 
 pushd "$DOTFILES" || { echo "Failed to change directory to \$DOTFILES"; exit 1; }
 

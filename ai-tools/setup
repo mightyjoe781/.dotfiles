@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Symlink ai-tools into GitHub Copilot and Claude Code
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+echo "Setting up ai-tools symlinks..."
+
+# --- GitHub Copilot ---
+# Agents live in ~/.copilot/agents/
+mkdir -p ~/.copilot
+if [ -d ~/.copilot/agents ] && [ ! -L ~/.copilot/agents ]; then
+  echo "Backing up existing ~/.copilot/agents to ~/.copilot/agents.bak"
+  mv ~/.copilot/agents ~/.copilot/agents.bak
+fi
+ln -sfn "$SCRIPT_DIR/agents" ~/.copilot/agents
+echo "Copilot: ~/.copilot/agents -> $SCRIPT_DIR/agents"
+
+# --- GitHub Copilot Skills ---
+# Skills live in ~/.copilot/skills/<name>/ (whole folder)
+mkdir -p ~/.copilot/skills
+for skill_dir in "$SCRIPT_DIR/skills/"/*/; do
+  skill_name=$(basename "$skill_dir")
+  link=~/.copilot/skills/"$skill_name"
+  if [ -d "$skill_dir" ]; then
+    ln -sfn "$skill_dir" "$link"
+    echo "Copilot: $link -> $skill_dir"
+  fi
+done
+
+# --- Claude Code ---
+# Slash commands live in ~/.claude/commands/<name>.md
+mkdir -p ~/.claude/commands
+for skill_dir in "$SCRIPT_DIR/skills/"/*/; do
+  skill_name=$(basename "$skill_dir")
+  target="$skill_dir/SKILL.md"
+  link=~/.claude/commands/"${skill_name}.md"
+  if [ -f "$target" ]; then
+    ln -sf "$target" "$link"
+    echo "Claude:  $link -> $target"
+  fi
+done
+
+echo "Done."
