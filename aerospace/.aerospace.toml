@@ -1,0 +1,126 @@
+config-version = 2
+
+start-at-login = true
+
+# --- Layout ---
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# --- Named Workspaces (your workflow) ---
+# 1 = work (office)
+# 2 = code (deep work)
+# 3 = explore
+# 4 = notes
+# 5 = chill
+
+persistent-workspaces = ["work", "code", "explore", "notes", "chill"]
+
+accordion-padding = 0
+
+gaps.inner.horizontal = 5
+gaps.inner.vertical = 5
+gaps.outer.left = 0
+gaps.outer.right = 0
+gaps.outer.bottom = 0
+gaps.outer.top = 0
+# gaps.outer.top = [
+#   { monitor."built-in" = 10 },
+#   { monitor.main = 37 },       # sketchybar height is 37
+#   { monitor.secondary = 5 },
+#   20,
+# ]
+
+
+# --- Keybindings ---
+[mode.main.binding]
+
+# Focus (vim-style)
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# Move windows
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+cmd-shift-f = 'fullscreen'
+alt-o = 'focus-back-and-forth'
+
+# Resize
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
+
+# Layout switching
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
+
+# Reset layout
+# alt-enter = 'flatten-workspace-tree'
+alt-enter = 'workspace-back-and-forth'
+
+# Workspaces (named)
+alt-1 = 'workspace work'
+alt-2 = 'workspace code'
+alt-3 = 'workspace explore'
+alt-4 = 'workspace notes'
+alt-5 = 'workspace chill'
+
+# Move to workspace
+alt-shift-1 = 'move-node-to-workspace work'
+alt-shift-2 = 'move-node-to-workspace code'
+alt-shift-3 = 'move-node-to-workspace explore'
+alt-shift-4 = 'move-node-to-workspace notes'
+alt-shift-5 = 'move-node-to-workspace chill'
+
+# Quick toggle
+alt-tab = 'workspace-back-and-forth'
+
+# Optional: toggle floating quickly
+alt-f = 'layout floating tiling'
+
+[exec.env-vars]
+PATH = '${HOME}/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/run/current-system/sw/bin/:${PATH}:'
+
+# --- App Routing (minimal + useful) ---
+
+# Office
+[[on-window-detected]]
+if.app-id = "com.citrix.receiver"
+run = "move-node-to-workspace work"
+
+[[on-window-detected]]
+if.app-id = "us.zoom.xos"
+run = "move-node-to-workspace work"
+
+# Coding
+[[on-window-detected]]
+if.app-id = "com.microsoft.VSCode"
+run = "move-node-to-workspace code"
+
+[[on-window-detected]]
+if.app-id = "com.mitchellh.ghostty"
+run = "move-node-to-workspace code"
+
+[[on-window-detected]]
+if.app-id = "com.google.Chrome"
+run = "move-node-to-workspace explore"
+
+# Notes
+[[on-window-detected]]
+if.app-id = "md.obsidian"
+run = "move-node-to-workspace notes"
+
+# Optional: floating apps (avoid tiling issues)
+[[on-window-detected]]
+if.app-id = "com.apple.finder"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.systempreferences"
+run = "layout floating"
